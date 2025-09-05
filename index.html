@@ -542,8 +542,9 @@
 
             const starsContainer = document.getElementById('starsContainer');
             const yellowPetalsContainer = document.getElementById('yellowPetalsContainer');
-            const centerFlower = document.getElementById('centerFlower');
+            const centerImage = document.getElementById('centerImage');
             const introPanel = document.getElementById('introPanel');
+            const centerFlower = document.getElementById('centerFlower');
 
             function createStars() {
                 for (let i = 0; i < 80; i++) {
@@ -601,6 +602,8 @@
 
             var doc = document;
             var flower = doc.querySelector('.flower');
+            var range = doc.querySelector('.range');
+
             var maxParts = 20;
             var maxPetalsDef = 6;
             var maxPetals = maxPetalsDef;
