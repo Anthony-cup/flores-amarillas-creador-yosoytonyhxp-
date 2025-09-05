@@ -352,6 +352,81 @@
             border-radius: 15px;
             background: transparent;
         }
+
+        .loading-panel {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 400px;
+            background: rgba(26, 10, 46, 0.9);
+            border-radius: 10px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), 0 0 6px rgba(255, 215, 0, 0.2);
+            z-index: 1000;
+            padding: 16px;
+            text-align: center;
+            transition: opacity 0.2s ease;
+        }
+
+        .loading-panel p {
+            color: #fffacd;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .loading-bar {
+            width: 100%;
+            height: 8px;
+            background: #333333;
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid #ffd700;
+            position: relative;
+            box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
+        }
+
+        .loading-bar-fill {
+            width: 0;
+            height: 100%;
+            background: linear-gradient(45deg, #ffd700, #fffacd);
+            border-radius: 4px;
+            transition: width 2s ease-in-out;
+        }
+
+        .loading-bar-fill.active {
+            width: 100%;
+        }
+
+        .error-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 400px;
+            background: rgba(46, 10, 26, 0.9);
+            border-radius: 10px;
+            border: 2px solid #dc3545;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            padding: 16px;
+            text-align: center;
+            color: #fffacd;
+            font-size: 1rem;
+        }
+
+        .error-message a {
+            color: #ffd700;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .error-message a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -363,6 +438,17 @@
         <div class="aurora-cloud aurora-cloud-3"></div>
     </div>
     <div class="yellow-petals-container" id="yellowPetalsContainer"></div>
+
+    <div class="loading-panel" id="loadingPanel">
+        <p>⏳ Cargando tu mensaje...</p>
+        <div class="loading-bar">
+            <div class="loading-bar-fill" id="loadingBarFill"></div>
+        </div>
+    </div>
+
+    <div class="error-message" id="errorMessage" style="display: none;">
+        <p>❌ Necesitas crear tu proyecto primero: <a href="https://flores-amarillas-53011.web.app">Crear Proyecto</a></p>
+    </div>
 
     <div class="intro-panel" id="introPanel">
         <iframe src="carta.html" class="intro-iframe" allowtransparency="true"></iframe>
@@ -402,14 +488,65 @@
         </div>
     </div>
 
-    <script>
-        console.clear();
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js';
+        import { getDatabase, ref, get } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyA36nLy1nQ4NB-39v_O3UQj3qrErVgxlh8",
+            authDomain: "flores-amarillas-53011.firebaseapp.com",
+            databaseURL: "https://flores-amarillas-53011-default-rtdb.firebaseio.com",
+            projectId: "flores-amarillas-53011",
+            storageBucket: "flores-amarillas-53011.firebasestorage.app",
+            messagingSenderId: "602385253254",
+            appId: "1:602385253254:web:04c1e0844b998485fca207",
+            measurementId: "G-0Y4HJB85MV"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
 
         const starsContainer = document.getElementById('starsContainer');
         const yellowPetalsContainer = document.getElementById('yellowPetalsContainer');
         const centerImage = document.getElementById('centerImage');
         const introPanel = document.getElementById('introPanel');
         const centerFlower = document.getElementById('centerFlower');
+        const loadingPanel = document.getElementById('loadingPanel');
+        const loadingBarFill = document.getElementById('loadingBarFill');
+        const errorMessage = document.getElementById('errorMessage');
+
+        async function loadData() {
+            loadingPanel.style.display = 'block';
+            loadingBarFill.classList.add('active');
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
+
+            if (!id) {
+                loadingPanel.style.display = 'none';
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            try {
+                const snapshot = await get(ref(database, 'mensajes/' + id));
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    if (data.imagen) {
+                        centerImage.src = data.imagen;
+                    }
+                    loadingPanel.style.display = 'none';
+                    startImageEntrance();
+                } else {
+                    loadingPanel.style.display = 'none';
+                    errorMessage.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Error al cargar datos:', error);
+                loadingPanel.style.display = 'none';
+                errorMessage.style.display = 'block';
+            }
+        }
 
         function createStars() {
             for (let i = 0; i < 80; i++) {
@@ -465,6 +602,7 @@
         window.addEventListener('load', () => {
             createStars();
             createFlower();
+            loadData();
         });
 
         var doc = document;
