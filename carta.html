@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Día de las Flores Amarillas</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Great+Vibes&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #ffd700 0%, #ff69b4 50%, #87ceeb 100%);
+            background-size: 200% 200%;
+            animation: aurora 8s ease-in-out infinite;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: 'Dancing Script', cursive;
+            color: #fff;
+            text-align: center;
+            position: relative;
+        }
+
+        @keyframes aurora {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Efectos mágicos de fondo */
+        .magic-background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .floating-flower {
+            position: absolute;
+            font-size: 2.5rem;
+            animation: floatAround 6s ease-in-out infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes floatAround {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-15px) rotate(90deg); }
+            50% { transform: translateY(-10px) rotate(180deg); }
+            75% { transform: translateY(-20px) rotate(270deg); }
+        }
+
+        .sparkle {
+            position: absolute;
+            color: #ffd700;
+            animation: sparkle 2s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.3; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .message {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            box-shadow: 
+                0 15px 35px rgba(255, 215, 0, 0.3),
+                0 0 0 2px rgba(255, 215, 0, 0.2);
+            color: #2c3e50;
+            max-width: 450px;
+            position: relative;
+            animation: messageGlow 4s ease-in-out infinite;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        @keyframes messageGlow {
+            0%, 100% { 
+                box-shadow: 0 15px 35px rgba(255, 215, 0, 0.3), 0 0 0 2px rgba(255, 215, 0, 0.2);
+            }
+            50% { 
+                box-shadow: 0 20px 45px rgba(255, 215, 0, 0.5), 0 0 0 2px rgba(255, 215, 0, 0.4);
+            }
+        }
+
+        .message::before {
+            content: '🌻';
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            font-size: 2rem;
+            animation: flowerSway 3s ease-in-out infinite;
+        }
+
+        .message::after {
+            content: '🌼';
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            font-size: 2rem;
+            animation: flowerSway 3s ease-in-out infinite reverse;
+        }
+
+        @keyframes flowerSway {
+            0%, 100% { transform: rotate(-10deg); }
+            50% { transform: rotate(10deg); }
+        }
+
+        .golden-heart {
+            display: inline-block;
+            font-size: 1.3rem;
+            color: #ffd700;
+            animation: heartPulse 2s ease-in-out infinite;
+            margin: 0 5px;
+            filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.6));
+        }
+
+        @keyframes heartPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+        }
+
+        .ok-button {
+            padding: 15px 35px;
+            font-size: 1.1rem;
+            background: linear-gradient(45deg, #ffd700, #ff69b4, #ffd700);
+            background-size: 200% 200%;
+            animation: buttonShine 3s ease-in-out infinite;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Dancing Script', cursive;
+            font-weight: bold;
+            box-shadow: 
+                0 10px 25px rgba(255, 215, 0, 0.4),
+                0 5px 15px rgba(255, 105, 180, 0.3);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes buttonShine {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .ok-button::before {
+            content: '✨';
+            position: absolute;
+            left: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: sparkleLeft 2s ease-in-out infinite;
+        }
+
+        .ok-button::after {
+            content: '✨';
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: sparkleRight 2s ease-in-out infinite;
+        }
+
+        @keyframes sparkleLeft {
+            0%, 100% { opacity: 0.5; transform: translateY(-50%) scale(0.8); }
+            50% { opacity: 1; transform: translateY(-50%) scale(1.2); }
+        }
+
+        @keyframes sparkleRight {
+            0%, 100% { opacity: 0.5; transform: translateY(-50%) scale(0.8); }
+            50% { opacity: 1; transform: translateY(-50%) scale(1.2); }
+        }
+
+        .ok-button:hover {
+            background: linear-gradient(45deg, #ffed4e, #ff8fab, #ffed4e);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 
+                0 15px 35px rgba(255, 215, 0, 0.6),
+                0 8px 20px rgba(255, 105, 180, 0.4);
+        }
+
+        .ok-button:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+    </style>
+</head>
+<body>
+    <div class="magic-background">
+        <!-- Flores flotantes -->
+        <div class="floating-flower" style="top: 15%; left: 10%; animation-delay: 0s;">🌻</div>
+        <div class="floating-flower" style="top: 25%; right: 15%; animation-delay: -1s;">🌼</div>
+        <div class="floating-flower" style="bottom: 20%; left: 15%; animation-delay: -2s;">🌻</div>
+        <div class="floating-flower" style="bottom: 30%; right: 10%; animation-delay: -3s;">🌼</div>
+        
+        <!-- Brillos mágicos -->
+        <div class="sparkle" style="top: 20%; left: 25%; font-size: 1.5rem; animation-delay: 0s;">✨</div>
+        <div class="sparkle" style="top: 70%; right: 30%; font-size: 1.2rem; animation-delay: -1s;">⭐</div>
+        <div class="sparkle" style="bottom: 40%; left: 20%; font-size: 1.3rem; animation-delay: -2s;">💫</div>
+        <div class="sparkle" style="top: 40%; right: 25%; font-size: 1.4rem; animation-delay: -3s;">✨</div>
+    </div>
+
+    <div class="message">
+        🌻 ¡Bienvenido al Día de las Flores Amarillas! 🌼
+        <br><br>
+        Explora los paneles con girasoles bajo un cielo de auroras rosadas.
+        <span class="golden-heart">💛</span>
+        <br><br>
+        <em>Que cada momento brille como el oro del sol</em>
+        <span class="golden-heart">✨</span>
+    </div>
+    
+    <button class="ok-button" onclick="hidePanel()">OK</button>
+    
+    <script>
+        function hidePanel() {
+            window.parent.postMessage('hideIntroPanel', '*');
+        }
+
+        // Crear pétalos cayendo ocasionalmente
+        setInterval(() => {
+            const petal = document.createElement('div');
+            petal.innerHTML = ['🌼', '🌻', '💛'][Math.floor(Math.random() * 3)];
+            petal.style.position = 'absolute';
+            petal.style.left = Math.random() * 100 + '%';
+            petal.style.top = '-30px';
+            petal.style.fontSize = '20px';
+            petal.style.pointerEvents = 'none';
+            petal.style.animation = 'petalsfall 4s linear forwards';
+            petal.style.opacity = '0.7';
+            document.body.appendChild(petal);
+            
+            setTimeout(() => petal.remove(), 4000);
+        }, 1500);
+
+        // Estilo para pétalos cayendo
+        const petalStyle = document.createElement('style');
+        petalStyle.textContent = `
+            @keyframes petalsfall {
+                to {
+                    transform: translateY(100vh) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(petalStyle);
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
