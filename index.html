@@ -429,7 +429,7 @@
 </head>
 <body>
     <div class="loading-panel" id="loadingPanel">
-        <p>⏳ Cargando...</p>
+        <p>⏳ Cargando tu mensaje...</p>
         <div class="loading-bar">
             <div class="loading-bar-fill" id="loadingBarFill"></div>
         </div>
@@ -437,6 +437,53 @@
 
     <div class="error-message" id="errorMessage" style="display: none;">
         <p>❌ Necesitas crear tu proyecto primero: <a href="https://flores-amarillas-53011.web.app">Crear Proyecto</a></p>
+    </div>
+
+    <div class="stars-container" id="starsContainer"></div>
+    <div class="moon"></div>
+    <div class="aurora-clouds-container">
+        <div class="aurora-cloud aurora-cloud-1"></div>
+        <div class="aurora-cloud aurora-cloud-2"></div>
+        <div class="aurora-cloud aurora-cloud-3"></div>
+    </div>
+    <div class="yellow-petals-container" id="yellowPetalsContainer"></div>
+
+    <div class="intro-panel" id="introPanel">
+        <iframe src="carta.html" class="intro-iframe" allowtransparency="true"></iframe>
+    </div>
+
+    <div class="container-3d">
+        <div class="panels-wrapper" id="panelsWrapper">
+            <div class="floor-green"></div>
+            <div class="center-flower" id="centerFlower">
+                <div class="wrapper">
+                    <div class="flower">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&h=500&fit=crop&crop=center"
+                             alt="Imagen Central"
+                             class="center-image"
+                             id="centerImage">
+                    </div>
+                </div>
+            </div>
+            <div class="panel-3d panel-1">
+                <iframe src="Paneles.html" class="panel-iframe" allowtransparency="true"></iframe>
+            </div>
+            <div class="panel-3d panel-2">
+                <iframe src="Paneles.html" class="panel-iframe" allowtransparency="true"></iframe>
+            </div>
+            <div class="panel-3d panel-3">
+                <iframe src="Paneles.html" class="panel-iframe" allowtransparency="true"></iframe>
+            </div>
+            <div class="panel-3d panel-4">
+                <iframe src="Paneles.html" class="panel-iframe" allowtransparency="true"></iframe>
+            </div>
+            <div class="panel-3d panel-5">
+                <iframe src="Paneles.html" class="panel-iframe" allowtransparency="true"></iframe>
+            </div>
+            <div class="panel-3d panel-6">
+                <iframe src="Paneles.html" class="panel-iframe" allowtransparency="true"></iframe>
+            </div>
+        </div>
     </div>
 
     <script type="module">
@@ -457,11 +504,16 @@
         const app = initializeApp(firebaseConfig);
         const database = getDatabase(app);
 
+        const starsContainer = document.getElementById('starsContainer');
+        const yellowPetalsContainer = document.getElementById('yellowPetalsContainer');
+        const centerImage = document.getElementById('centerImage');
+        const introPanel = document.getElementById('introPanel');
+        const centerFlower = document.getElementById('centerFlower');
         const loadingPanel = document.getElementById('loadingPanel');
         const loadingBarFill = document.getElementById('loadingBarFill');
         const errorMessage = document.getElementById('errorMessage');
 
-        async function checkAndLoadPage() {
+        async function loadData() {
             loadingPanel.style.display = 'block';
             loadingBarFill.classList.add('active');
 
@@ -471,6 +523,12 @@
             if (!id) {
                 loadingPanel.style.display = 'none';
                 errorMessage.style.display = 'block';
+                document.getElementById('starsContainer').style.display = 'none';
+                document.getElementById('yellowPetalsContainer').style.display = 'none';
+                document.getElementById('introPanel').style.display = 'none';
+                document.getElementById('container-3d').style.display = 'none';
+                document.querySelector('.moon').style.display = 'none';
+                document.querySelector('.aurora-clouds-container').style.display = 'none';
                 return;
             }
 
@@ -478,201 +536,160 @@
                 const snapshot = await get(ref(database, 'mensajes/' + id));
                 if (snapshot.exists()) {
                     const data = snapshot.val();
+                    if (data.imagen) {
+                        centerImage.src = data.imagen;
+                    }
                     loadingPanel.style.display = 'none';
-                    renderPage(data);
+                    startImageEntrance();
                 } else {
                     loadingPanel.style.display = 'none';
                     errorMessage.style.display = 'block';
+                    document.getElementById('starsContainer').style.display = 'none';
+                    document.getElementById('yellowPetalsContainer').style.display = 'none';
+                    document.getElementById('introPanel').style.display = 'none';
+                    document.getElementById('container-3d').style.display = 'none';
+                    document.querySelector('.moon').style.display = 'none';
+                    document.querySelector('.aurora-clouds-container').style.display = 'none';
                 }
             } catch (error) {
                 console.error('Error al cargar datos:', error);
                 loadingPanel.style.display = 'none';
                 errorMessage.style.display = 'block';
+                document.getElementById('starsContainer').style.display = 'none';
+                document.getElementById('yellowPetalsContainer').style.display = 'none';
+                document.getElementById('introPanel').style.display = 'none';
+                document.getElementById('container-3d').style.display = 'none';
+                document.querySelector('.moon').style.display = 'none';
+                document.querySelector('.aurora-clouds-container').style.display = 'none';
             }
         }
 
-        function renderPage(data) {
-            const content = `
-                <div class="stars-container" id="starsContainer"></div>
-                <div class="moon"></div>
-                <div class="aurora-clouds-container">
-                    <div class="aurora-cloud aurora-cloud-1"></div>
-                    <div class="aurora-cloud aurora-cloud-2"></div>
-                    <div class="aurora-cloud aurora-cloud-3"></div>
-                </div>
-                <div class="yellow-petals-container" id="yellowPetalsContainer"></div>
-                <div class="intro-panel" id="introPanel">
-                    <iframe src="carta.html" class="intro-iframe" allowtransparency="true"></iframe>
-                </div>
-                <div class="container-3d">
-                    <div class="panels-wrapper" id="panelsWrapper">
-                        <div class="floor-green"></div>
-                        <div class="center-flower" id="centerFlower">
-                            <div class="wrapper">
-                                <div class="flower">
-                                    <img src="${data.imagen || 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&h=500&fit=crop&crop=center'}"
-                                         alt="Imagen Central"
-                                         class="center-image"
-                                         id="centerImage">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel-3d panel-1">
-                            <iframe src="Paneles.html" class="panel-iframe" allowtransparency="true"></iframe>
-                        </div>
-                        <div class="panel-3d panel-2">
-                            <iframe src="Paneles.html" class="panel-iframe" allowtransparency="true"></iframe>
-                        </div>
-                        <div class="panel-3d panel-3">
-                            <iframe src="Paneles.html" class="panel-iframe" allowtransparency="true"></iframe>
-                        </div>
-                        <div class="panel-3d panel-4">
-                            <iframe src="Paneles.html" class="panel-iframe" allowtransparency="true"></iframe>
-                        </div>
-                        <div class="panel-3d panel-5">
-                            <iframe src="Paneles.html" class="panel-iframe" allowtransparency="true"></iframe>
-                        </div>
-                        <div class="panel-3d panel-6">
-                            <iframe src="Paneles.html" class="panel-iframe" allowtransparency="true"></iframe>
-                        </div>
-                    </div>
-                </div>
-            `;
-            document.body.insertAdjacentHTML('beforeend', content);
+        function createStars() {
+            for (let i = 0; i < 80; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 2.5 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
 
-            const starsContainer = document.getElementById('starsContainer');
-            const yellowPetalsContainer = document.getElementById('yellowPetalsContainer');
-            const centerImage = document.getElementById('centerImage');
-            const introPanel = document.getElementById('introPanel');
-            const centerFlower = document.getElementById('centerFlower');
+        function createYellowPetalOrHeart() {
+            const isHeart = Math.random() > 0.7;
+            const element = document.createElement('div');
+            element.className = isHeart ? 'heart' : 'yellow-petal';
+            element.style.left = (Math.random() * 20 + 40) + '%';
+            element.style.top = '-10px';
+            element.style.setProperty('--random', Math.random());
+            element.style.animationDuration = (Math.random() * 3 + 4.5) + 's';
+            yellowPetalsContainer.appendChild(element);
 
-            function createStars() {
-                for (let i = 0; i < 80; i++) {
-                    const star = document.createElement('div');
-                    star.className = 'star';
-                    star.style.left = Math.random() * 100 + '%';
-                    star.style.top = Math.random() * 100 + '%';
-                    star.style.animationDelay = Math.random() * 2.5 + 's';
-                    starsContainer.appendChild(star);
+            setTimeout(() => {
+                if (element.parentNode) {
+                    element.parentNode.removeChild(element);
                 }
-            }
+            }, 7500);
+        }
 
-            function createYellowPetalOrHeart() {
-                const isHeart = Math.random() > 0.7;
-                const element = document.createElement('div');
-                element.className = isHeart ? 'heart' : 'yellow-petal';
-                element.style.left = (Math.random() * 20 + 40) + '%';
-                element.style.top = '-10px';
-                element.style.setProperty('--random', Math.random());
-                element.style.animationDuration = (Math.random() * 3 + 4.5) + 's';
-                yellowPetalsContainer.appendChild(element);
-
-                setTimeout(() => {
-                    if (element.parentNode) {
-                        element.parentNode.removeChild(element);
-                    }
-                }, 7500);
-            }
-
-            function startImageEntrance() {
-                const interval = setInterval(() => {
-                    for (let i = 0; i < 8; i++) {
-                        createYellowPetalOrHeart();
-                    }
-                }, 100);
-
-                setTimeout(() => {
-                    clearInterval(interval);
-                    centerFlower.classList.add('show');
-                    setTimeout(() => {
-                        yellowPetalsContainer.style.display = 'none';
-                    }, 2000);
-                }, 5500);
-            }
-
-            window.addEventListener('message', (event) => {
-                if (event.data === 'hideIntroPanel') {
-                    introPanel.style.display = 'none';
-                    startImageEntrance();
+        function startImageEntrance() {
+            const interval = setInterval(() => {
+                for (let i = 0; i < 8; i++) {
+                    createYellowPetalOrHeart();
                 }
-            });
+            }, 100);
 
+            setTimeout(() => {
+                clearInterval(interval);
+                centerFlower.classList.add('show');
+                setTimeout(() => {
+                    yellowPetalsContainer.style.display = 'none';
+                }, 2000);
+            }, 5500);
+        }
+
+        window.addEventListener('message', (event) => {
+            if (event.data === 'hideIntroPanel') {
+                introPanel.style.display = 'none';
+                startImageEntrance();
+            }
+        });
+
+        window.addEventListener('load', () => {
             createStars();
             createFlower();
+            loadData();
+        });
 
-            var doc = document;
-            var flower = doc.querySelector('.flower');
-            var range = doc.querySelector('.range');
+        var doc = document;
+        var flower = doc.querySelector('.flower');
+        var range = doc.querySelector('.range');
 
-            var maxParts = 20;
-            var maxPetalsDef = 6;
-            var maxPetals = maxPetalsDef;
-            var partsFontStepDef = 25 / maxParts;
-            var partsFontStep = partsFontStepDef;
-            var huetStep = 150 / maxParts;
+        var maxParts = 20;
+        var maxPetalsDef = 6;
+        var maxPetals = maxPetalsDef;
+        var partsFontStepDef = 25 / maxParts;
+        var partsFontStep = partsFontStepDef;
+        var huetStep = 150 / maxParts;
 
-            function createFlower() {
-                var angle = 360 / maxPetals;
+        function createFlower() {
+            var angle = 360 / maxPetals;
 
-                for (var i = 0; i < maxPetals; i++) {
-                    var petal = createPetal();
-                    var currAngle = angle * i + 'deg';
-                    var transform = 'transform: rotateY(' + currAngle + ') rotateX(-30deg) translateZ(9vmin)';
-                    petal.setAttribute('style', transform);
-                    flower.appendChild(petal);
-                }
-            }
-
-            function createPetal() {
-                var box = createBox(null, 0);
-                var petal = doc.createElement('div');
-                petal.classList.add('petal');
-
-                for (var i = 1; i <= maxParts; i++) {
-                    newBox = createBox(box, i);
-                    box = newBox;
-                }
-
-                petal.appendChild(box);
-                return petal;
-            }
-
-            function createBox(box, pos) {
-                var fontSize = partsFontStep * (maxParts - pos) + 'vmin';
-                var half = maxParts / 2;
-                var bright = '50';
-
-                if (pos < half + 1) {
-                    fontSize = partsFontStep * pos + 'vmin';
-                } else {
-                    bright = 10 + 40 / half * (maxParts - pos);
-                }
-
-                var color = 'hsl(' + huetStep * pos + ', 100%, ' + bright + '%)';
-
-                var newShape = doc.createElement('div');
-                newShape.classList.add('shape');
-
-                var newBox = doc.createElement('div');
-                newBox.classList.add('box');
-
-                var boxStyle = [
-                    'color: ' + color,
-                    'font-size: ' + fontSize
-                ].join(';');
-                newBox.setAttribute('style', boxStyle);
-
-                if (box) {
-                    newBox.appendChild(box);
-                }
-
-                newBox.appendChild(newShape);
-                return newBox;
+            for (var i = 0; i < maxPetals; i++) {
+                var petal = createPetal();
+                var currAngle = angle * i + 'deg';
+                var transform = 'transform: rotateY(' + currAngle + ') rotateX(-30deg) translateZ(9vmin)';
+                petal.setAttribute('style', transform);
+                flower.appendChild(petal);
             }
         }
 
-        window.addEventListener('load', checkAndLoadPage);
+        function createPetal() {
+            var box = createBox(null, 0);
+            var petal = doc.createElement('div');
+            petal.classList.add('petal');
+
+            for (var i = 1; i <= maxParts; i++) {
+                newBox = createBox(box, i);
+                box = newBox;
+            }
+
+            petal.appendChild(box);
+            return petal;
+        }
+
+        function createBox(box, pos) {
+            var fontSize = partsFontStep * (maxParts - pos) + 'vmin';
+            var half = maxParts / 2;
+            var bright = '50';
+
+            if (pos < half + 1) {
+                fontSize = partsFontStep * pos + 'vmin';
+            } else {
+                bright = 10 + 40 / half * (maxParts - pos);
+            }
+
+            var color = 'hsl(' + huetStep * pos + ', 100%, ' + bright + '%)';
+
+            var newShape = doc.createElement('div');
+            newShape.classList.add('shape');
+
+            var newBox = doc.createElement('div');
+            newBox.classList.add('box');
+
+            var boxStyle = [
+                'color: ' + color,
+                'font-size: ' + fontSize
+            ].join(';');
+            newBox.setAttribute('style', boxStyle);
+
+            if (box) {
+                newBox.appendChild(box);
+            }
+
+            newBox.appendChild(newShape);
+            return newBox;
+        }
     </script>
 </body>
 </html>
-
