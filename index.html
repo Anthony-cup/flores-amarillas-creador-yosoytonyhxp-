@@ -429,7 +429,7 @@
 </head>
 <body>
     <div class="loading-panel" id="loadingPanel">
-        <p>⏳ Cargando tu mensaje...</p>
+        <p>⏳ Car...</p>
         <div class="loading-bar">
             <div class="loading-bar-fill" id="loadingBarFill"></div>
         </div>
@@ -524,6 +524,7 @@
             const id = urlParams.get('id');
 
             if (!id) {
+                console.error('No ID provided in URL');
                 loadingPanel.style.display = 'none';
                 errorMessage.style.display = 'block';
                 return;
@@ -546,6 +547,7 @@
                     createStars();
                     createFlower();
                 } else {
+                    console.error('No data found for ID:', id);
                     loadingPanel.style.display = 'none';
                     errorMessage.style.display = 'block';
                 }
@@ -607,7 +609,9 @@
             }
         });
 
-        window.addEventListener('load', checkAndLoadPage);
+        window.addEventListener('load', () => {
+            checkAndLoadPage();
+        });
 
         var doc = document;
         var flower = doc.querySelector('.flower');
