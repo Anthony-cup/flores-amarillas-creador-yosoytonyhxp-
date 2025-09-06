@@ -655,7 +655,6 @@
             element.style.top = '-5vh';
             element.style.setProperty('--random', Math.random());
             element.style.animationDuration = (Math.random() * 3 + 5) + 's';
-
             emojiRainContainer.appendChild(element);
 
             setTimeout(() => {
@@ -667,7 +666,7 @@
 
         function startEmojiRain() {
             setInterval(() => {
-                if (Math.random() < 0.2) { // Sparse creation for optimization
+                if (Math.random() < 0.4) { // Increased frequency for denser rain
                     createEmoji();
                 }
             }, 500);
