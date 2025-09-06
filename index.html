@@ -543,6 +543,8 @@
                     container3d.style.display = 'block';
                     auroraCloudsContainer.style.display = 'block';
                     moon.style.display = 'block';
+                    createStars();
+                    createFlower();
                 } else {
                     loadingPanel.style.display = 'none';
                     errorMessage.style.display = 'block';
@@ -605,11 +607,7 @@
             }
         });
 
-        window.addEventListener('load', () => {
-            checkAndLoadPage();
-            createStars();
-            createFlower();
-        });
+        window.addEventListener('load', checkAndLoadPage);
 
         var doc = document;
         var flower = doc.querySelector('.flower');
