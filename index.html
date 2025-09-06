@@ -14,7 +14,7 @@
             margin: 0;
             padding: 0;
             background: linear-gradient(135deg, rgba(26, 10, 46, 0.9) 0%, rgba(45, 27, 105, 0.9) 50%, rgba(10, 10, 26, 0.9) 100%), 
-                        url('https://s0.smartresize.com/wallpaper/260/397/HD-wallpaper-flowers-sunset-sky-field-sunflower-yellow-flower.jpg') no-repeat center center fixed;
+                        url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=800&fit=crop') no-repeat center center fixed;
             background-size: cover;
             overflow: hidden;
             font-family: 'Georgia', serif;
@@ -36,7 +36,8 @@
             height: 2px;
             background: #fffacd;
             border-radius: 50%;
-            animation: twinkle 2.5s ease-in-out infinite alternate;
+            animation: twinkle 2s ease-in-out infinite alternate;
+            will-change: opacity;
         }
 
         @keyframes twinkle {
@@ -46,20 +47,21 @@
 
         .moon {
             position: fixed;
-            width: 90px;
-            height: 90px;
+            width: 80px;
+            height: 80px;
             background: radial-gradient(circle at 30% 30%, #ffd700 0%, #fffacd 100%);
             border-radius: 50%;
             top: 8%;
             right: 12%;
             z-index: -2;
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
-            animation: moonGlow 5s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+            animation: moonGlow 4s ease-in-out infinite;
+            will-change: box-shadow;
         }
 
         @keyframes moonGlow {
-            0%, 100% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.6); }
-            50% { box-shadow: 0 0 60px rgba(255, 215, 0, 0.9); }
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.4); }
+            50% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.7); }
         }
 
         .aurora-clouds-container {
@@ -74,35 +76,35 @@
 
         .aurora-cloud {
             position: absolute;
-            width: 600px;
-            height: 200px;
-            background: radial-gradient(ellipse at center, rgba(138, 43, 226, 0.4) 0%, rgba(255, 215, 0, 0.3) 40%, transparent 70%);
+            width: 400px;
+            height: 150px;
+            background: radial-gradient(ellipse at center, rgba(138, 43, 226, 0.3) 0%, rgba(255, 215, 0, 0.2) 40%, transparent 70%);
             border-radius: 50%;
-            filter: blur(35px);
-            animation: auroraFlow 18s linear infinite;
+            animation: auroraFlow 15s linear infinite;
+            will-change: transform, opacity;
         }
 
         .aurora-cloud-1 {
             top: 15%;
-            left: -200px;
+            left: -150px;
         }
 
         .aurora-cloud-2 {
             top: 35%;
-            left: -300px;
-            animation-delay: -6s;
+            left: -200px;
+            animation-delay: -5s;
         }
 
         .aurora-cloud-3 {
             top: 55%;
-            left: -250px;
-            animation-delay: -12s;
+            left: -180px;
+            animation-delay: -10s;
         }
 
         @keyframes auroraFlow {
-            0% { transform: translateX(-200px); opacity: 0.3; }
-            50% { transform: translateX(50vw); opacity: 0.6; }
-            100% { transform: translateX(120vw); opacity: 0.3; }
+            0% { transform: translateX(-150px); opacity: 0.3; }
+            50% { transform: translateX(50vw); opacity: 0.5; }
+            100% { transform: translateX(100vw); opacity: 0.3; }
         }
 
         .yellow-petals-container {
@@ -117,24 +119,26 @@
 
         .yellow-petal {
             position: absolute;
-            width: 14px;
-            height: 8px;
+            width: 12px;
+            height: 7px;
             background: linear-gradient(45deg, #ffd700, #fffacd);
             border-radius: 50% 20% 50% 20%;
             animation: yellowPetalFall linear forwards;
-            opacity: 0.9;
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.9);
+            opacity: 0.8;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+            will-change: transform, opacity;
         }
 
         .heart {
             position: absolute;
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             background: radial-gradient(circle, #ff69b4 0%, #ff1493 100%);
             clip-path: polygon(50% 0%, 100% 30%, 75% 100%, 25% 100%, 0% 30%);
             animation: yellowPetalFall linear forwards;
-            opacity: 0.8;
-            box-shadow: 0 0 10px rgba(255, 105, 180, 0.7);
+            opacity: 0.7;
+            box-shadow: 0 0 8px rgba(255, 105, 180, 0.5);
+            will-change: transform, opacity;
         }
 
         .emoji-rain {
@@ -149,18 +153,19 @@
 
         .emoji {
             position: absolute;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             animation: emojiFall linear forwards;
-            opacity: 0.8;
+            opacity: 0.7;
+            will-change: transform, opacity;
         }
 
         @keyframes yellowPetalFall {
             0% {
                 transform: translateY(0px) translateX(0px) rotate(0deg);
-                opacity: 0.9;
+                opacity: 0.8;
             }
             100% {
-                transform: translateY(80vh) translateX(calc((var(--random) - 0.5) * 180px)) rotate(540deg);
+                transform: translateY(70vh) translateX(calc((var(--random) - 0.5) * 150px)) rotate(360deg);
                 opacity: 0.1;
             }
         }
@@ -168,10 +173,10 @@
         @keyframes emojiFall {
             0% {
                 transform: translateY(-5vh) translateX(0px) rotate(0deg);
-                opacity: 0.8;
+                opacity: 0.7;
             }
             100% {
-                transform: translateY(100vh) translateX(calc((var(--random) - 0.5) * 100px)) rotate(360deg);
+                transform: translateY(90vh) translateX(calc((var(--random) - 0.5) * 80px)) rotate(360deg);
                 opacity: 0.2;
             }
         }
@@ -180,7 +185,7 @@
             position: relative;
             width: 100vw;
             height: 100vh;
-            perspective: 1200px;
+            perspective: 800px;
             perspective-origin: center center;
         }
 
@@ -193,6 +198,7 @@
             transform-style: preserve-3d;
             transform: translate(-50%, -50%);
             animation: panelsRotate 60s linear infinite;
+            will-change: transform;
         }
 
         @keyframes panelsRotate {
@@ -214,29 +220,30 @@
             background: transparent;
         }
 
-        .panel-1 { transform: rotateY(0deg) translateZ(500px); }
-        .panel-2 { transform: rotateY(60deg) translateZ(500px); }
-        .panel-3 { transform: rotateY(120deg) translateZ(500px); }
-        .panel-4 { transform: rotateY(180deg) translateZ(500px); }
-        .panel-5 { transform: rotateY(240deg) translateZ(500px); }
-        .panel-6 { transform: rotateY(300deg) translateZ(500px); }
+        .panel-1 { transform: rotateY(0deg) translateZ(400px); }
+        .panel-2 { transform: rotateY(60deg) translateZ(400px); }
+        .panel-3 { transform: rotateY(120deg) translateZ(400px); }
+        .panel-4 { transform: rotateY(180deg) translateZ(400px); }
+        .panel-5 { transform: rotateY(240deg) translateZ(400px); }
+        .panel-6 { transform: rotateY(300deg) translateZ(400px); }
 
         .floor-green {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 2000px;
-            height: 2000px;
+            width: 1500px;
+            height: 1500px;
             background: radial-gradient(circle, #2d1b69 10%, #1a1a2e 50%, #0a0a1a 80%);
             border-radius: 50%;
-            transform: translate(-50%, -50%) rotateX(90deg) translateZ(-300px);
-            box-shadow: 0 0 100px rgba(255, 215, 0, 0.5);
-            animation: nightGlow 4.5s ease-in-out infinite;
+            transform: translate(-50%, -50%) rotateX(90deg) translateZ(-250px);
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.3);
+            animation: nightGlow 4s ease-in-out infinite;
+            will-change: box-shadow;
         }
 
         @keyframes nightGlow {
-            0%, 100% { box-shadow: 0 0 100px rgba(255, 215, 0, 0.5); }
-            50% { box-shadow: 0 0 150px rgba(255, 215, 0, 0.7); }
+            0%, 100% { box-shadow: 0 0 50px rgba(255, 215, 0, 0.3); }
+            50% { box-shadow: 0 0 80px rgba(255, 215, 0, 0.5); }
         }
 
         .center-flower {
@@ -249,6 +256,7 @@
             transform-style: preserve-3d;
             animation: counterRotate 60s linear infinite;
             transition: opacity 1s ease, transform 1s ease;
+            will-change: transform, opacity;
         }
 
         .center-flower.show {
@@ -295,7 +303,8 @@
             width: calc(var(--size) * 3);
             transform-style: preserve-3d;
             transform-origin: bottom;
-            animation: rotate-box 12s infinite;
+            animation: rotate-box 10s infinite;
+            will-change: transform;
         }
 
         .shape {
@@ -309,22 +318,24 @@
                 calc(-1 * var(--shape-size) * 2) 0 0 0,
                 calc(-1 * var(--shape-size)) 0 0 0;
             border-radius: 50%;
-            animation: rotate-hue 5s infinite;
+            animation: rotate-hue 4s infinite;
+            will-change: filter;
         }
 
         .center-image {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 120px;
-            height: 120px;
+            width: 100px;
+            height: 100px;
             transform: translate(-50%, -50%) translateZ(10px);
             border-radius: 50%;
             z-index: 10;
             opacity: 0;
-            filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.8));
+            filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.6));
             transition: opacity 1s ease;
             object-fit: cover;
+            will-change: opacity;
         }
 
         .center-flower.show .center-image {
@@ -332,7 +343,7 @@
         }
 
         .center-flower.show .box:not(.center-image) {
-            animation: rotate-box 12s infinite;
+            animation: rotate-box 10s infinite;
         }
 
         @keyframes rotate-box {
@@ -363,21 +374,21 @@
             position: fixed;
             top: 50%;
             left: 50%;
-            width: 400px;
-            height: 500px;
+            width: 350px;
+            height: 450px;
             transform: translate(-50%, -50%);
             z-index: 100;
             background: rgba(26, 10, 46, 0.9);
-            border-radius: 15px;
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.4);
-            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            border: 1px solid rgba(255, 215, 0, 0.2);
         }
 
         .intro-iframe {
             width: 100%;
             height: 100%;
             border: none;
-            border-radius: 15px;
+            border-radius: 12px;
             background: transparent;
         }
 
@@ -387,28 +398,28 @@
             left: 50%;
             transform: translate(-50%, -50%);
             width: 90%;
-            max-width: 400px;
+            max-width: 350px;
             background: rgba(26, 10, 46, 0.9);
-            border-radius: 10px;
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            border: 2px solid rgba(255, 215, 0, 0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
             z-index: 1000;
-            padding: 16px;
+            padding: 12px;
             text-align: center;
             color: #fffacd;
         }
 
         .loading-panel p {
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 500;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .loading-bar {
             width: 100%;
-            height: 8px;
+            height: 6px;
             background: #333333;
-            border-radius: 4px;
+            border-radius: 3px;
             overflow: hidden;
             border: 1px solid #ffd700;
             position: relative;
@@ -418,8 +429,8 @@
             width: 0;
             height: 100%;
             background: linear-gradient(45deg, #ffd700, #fffacd);
-            border-radius: 4px;
-            transition: width 2s ease-in-out;
+            border-radius: 3px;
+            transition: width 1.5s ease-in-out;
         }
 
         .loading-bar-fill.active {
@@ -432,16 +443,16 @@
             left: 50%;
             transform: translate(-50%, -50%);
             width: 90%;
-            max-width: 400px;
+            max-width: 350px;
             background: rgba(46, 10, 26, 0.9);
-            border-radius: 10px;
+            border-radius: 8px;
             border: 2px solid #dc3545;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
             z-index: 1000;
-            padding: 16px;
+            padding: 12px;
             text-align: center;
             color: #fffacd;
-            font-size: 1rem;
+            font-size: 0.9rem;
         }
 
         .error-message a {
@@ -452,6 +463,30 @@
 
         .error-message a:hover {
             text-decoration: underline;
+        }
+
+        /* Mobile-specific adjustments */
+        @media (max-width: 600px) {
+            .panels-wrapper {
+                width: 250px;
+                height: 350px;
+            }
+            .panel-3d {
+                width: 250px;
+                height: 350px;
+            }
+            .intro-panel {
+                width: 300px;
+                height: 400px;
+            }
+            .moon {
+                width: 60px;
+                height: 60px;
+            }
+            .aurora-cloud {
+                width: 300px;
+                height: 100px;
+            }
         }
     </style>
 </head>
@@ -548,6 +583,13 @@
         const auroraCloudsContainer = document.querySelector('.aurora-clouds-container');
         const moon = document.querySelector('.moon');
 
+        // Mobile detection
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        const starCount = isMobile ? 50 : 80;
+        const petalFrequency = isMobile ? 200 : 100;
+        const emojiFrequency = isMobile ? 700 : 500;
+        const petalCount = isMobile ? 4 : 8;
+
         async function checkAndLoadPage() {
             loadingPanel.style.display = 'block';
             loadingBarFill.classList.add('active');
@@ -570,14 +612,12 @@
                     const data = snapshot.val();
                     console.log('Datos obtenidos:', data);
                     if (data.titulo && data.contenido) {
-                        // Actualizar imagen central si existe en los datos
                         if (data.imagen) {
                             console.log('Cargando imagen desde Firebase:', data.imagen.substring(0, 50) + '...');
                             centerImage.src = data.imagen;
                         } else {
                             console.log('No se encontró imagen en Firebase, usando imagen por defecto');
                         }
-                        // Enviar datos a carta.html
                         introIframe.addEventListener('load', () => {
                             console.log('Enviando datos a carta.html:', data.titulo, data.contenido);
                             introIframe.contentWindow.postMessage({
@@ -586,7 +626,6 @@
                                 contenido: data.contenido
                             }, '*');
                         });
-                        // Mostrar elementos solo si los datos son válidos
                         loadingPanel.style.display = 'none';
                         starsContainer.style.display = 'block';
                         yellowPetalsContainer.style.display = 'block';
@@ -619,12 +658,12 @@
         }
 
         function createStars() {
-            for (let i = 0; i < 80; i++) {
+            for (let i = 0; i < starCount; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
                 star.style.left = Math.random() * 100 + '%';
                 star.style.top = Math.random() * 100 + '%';
-                star.style.animationDelay = Math.random() * 2.5 + 's';
+                star.style.animationDelay = Math.random() * 2 + 's';
                 starsContainer.appendChild(star);
             }
         }
@@ -636,14 +675,14 @@
             element.style.left = (Math.random() * 20 + 40) + '%';
             element.style.top = '-10px';
             element.style.setProperty('--random', Math.random());
-            element.style.animationDuration = (Math.random() * 3 + 4.5) + 's';
+            element.style.animationDuration = (Math.random() * 2.5 + 3.5) + 's';
             yellowPetalsContainer.appendChild(element);
 
             setTimeout(() => {
                 if (element.parentNode) {
                     element.parentNode.removeChild(element);
                 }
-            }, 7500);
+            }, 5000);
         }
 
         function createEmoji() {
@@ -654,38 +693,38 @@
             element.style.left = Math.random() * 100 + '%';
             element.style.top = '-5vh';
             element.style.setProperty('--random', Math.random());
-            element.style.animationDuration = (Math.random() * 3 + 5) + 's';
+            element.style.animationDuration = (Math.random() * 2.5 + 4) + 's';
             emojiRainContainer.appendChild(element);
 
             setTimeout(() => {
                 if (element.parentNode) {
                     element.parentNode.removeChild(element);
                 }
-            }, 8000);
+            }, 6000);
         }
 
         function startEmojiRain() {
             setInterval(() => {
-                if (Math.random() < 0.4) { // Increased frequency for denser rain
-                    createEmoji();
+                if (Math.random() < 0.4) {
+                    requestAnimationFrame(createEmoji);
                 }
-            }, 500);
+            }, emojiFrequency);
         }
 
         function startImageEntrance() {
             const interval = setInterval(() => {
-                for (let i = 0; i < 8; i++) {
-                    createYellowPetalOrHeart();
+                for (let i = 0; i < petalCount; i++) {
+                    requestAnimationFrame(createYellowPetalOrHeart);
                 }
-            }, 100);
+            }, petalFrequency);
 
             setTimeout(() => {
                 clearInterval(interval);
                 centerFlower.classList.add('show');
                 setTimeout(() => {
                     yellowPetalsContainer.style.display = 'none';
-                }, 2000);
-            }, 5500);
+                }, 1500);
+            }, 4000);
         }
 
         window.addEventListener('message', (event) => {
