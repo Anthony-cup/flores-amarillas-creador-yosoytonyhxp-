@@ -137,6 +137,23 @@
             box-shadow: 0 0 10px rgba(255, 105, 180, 0.7);
         }
 
+        .emoji-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 7;
+            pointer-events: none;
+        }
+
+        .emoji {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: emojiFall linear forwards;
+            opacity: 0.8;
+        }
+
         @keyframes yellowPetalFall {
             0% {
                 transform: translateY(0px) translateX(0px) rotate(0deg);
@@ -145,6 +162,17 @@
             100% {
                 transform: translateY(80vh) translateX(calc((var(--random) - 0.5) * 180px)) rotate(540deg);
                 opacity: 0.1;
+            }
+        }
+
+        @keyframes emojiFall {
+            0% {
+                transform: translateY(-5vh) translateX(0px) rotate(0deg);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(100vh) translateX(calc((var(--random) - 0.5) * 100px)) rotate(360deg);
+                opacity: 0.2;
             }
         }
 
@@ -447,6 +475,7 @@
         <div class="aurora-cloud aurora-cloud-3"></div>
     </div>
     <div class="yellow-petals-container" id="yellowPetalsContainer" style="display: none;"></div>
+    <div class="emoji-rain" id="emojiRainContainer" style="display: none;"></div>
 
     <div class="intro-panel" id="introPanel" style="display: none;">
         <iframe src="carta.html" class="intro-iframe" id="introIframe" allowtransparency="true"></iframe>
@@ -506,6 +535,7 @@
 
         const starsContainer = document.getElementById('starsContainer');
         const yellowPetalsContainer = document.getElementById('yellowPetalsContainer');
+        const emojiRainContainer = document.getElementById('emojiRainContainer');
         const centerImage = document.getElementById('centerImage');
         const introPanel = document.getElementById('introPanel');
         const introIframe = document.getElementById('introIframe');
@@ -560,12 +590,14 @@
                         loadingPanel.style.display = 'none';
                         starsContainer.style.display = 'block';
                         yellowPetalsContainer.style.display = 'block';
+                        emojiRainContainer.style.display = 'block';
                         introPanel.style.display = 'block';
                         container3d.style.display = 'block';
                         auroraCloudsContainer.style.display = 'block';
                         moon.style.display = 'block';
                         createStars();
                         createFlower();
+                        startEmojiRain();
                     } else {
                         console.warn('Datos incompletos para ID:', id);
                         loadingPanel.style.display = 'none';
@@ -612,6 +644,37 @@
                     element.parentNode.removeChild(element);
                 }
             }, 7500);
+        }
+
+        function createEmoji() {
+            const emojis = ['🌻', '🌼', '💛'];
+            const element = document.createElement('div');
+            element.className = 'emoji';
+            element.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            element.style.left = Math.random() * 100 + '%';
+            element.style.top = '-5vh';
+            element.style.setProperty('--random', Math.random());
+            element.style.animationDuration = (Math.random() * 3 + 5) + 's';
+            emojiRainContainer.appendChild(element);
+
+            setTimeout(() => {
+                if (element.parentNode) {
+                    element.parentNode.removeChild(element);
+                }
+            }, 8000);
+        }
+
+        function startEmojiRain() {
+            const interval = setInterval(() => {
+                if (Math.random() < 0.3) { // Sparse creation for optimization
+                    createEmoji();
+                }
+            }, 500);
+
+            setTimeout(() => {
+                clearInterval(interval);
+                emojiRainContainer.style.display = 'none';
+            }, 6000);
         }
 
         function startImageEntrance() {
