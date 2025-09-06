@@ -429,7 +429,7 @@
 </head>
 <body>
     <div class="loading-panel" id="loadingPanel">
-        <p>⏳ Cargando tu mensajeee...</p>
+        <p>⏳ Cargando tu mensajeeeeeeeee...</p>
         <div class="loading-bar">
             <div class="loading-bar-fill" id="loadingBarFill"></div>
         </div>
@@ -548,18 +548,22 @@
                                 contenido: data.contenido
                             }, '*');
                         });
+                        // Mostrar elementos solo si los datos son válidos
+                        loadingPanel.style.display = 'none';
+                        starsContainer.style.display = 'block';
+                        yellowPetalsContainer.style.display = 'block';
+                        introPanel.style.display = 'block';
+                        container3d.style.display = 'block';
+                        auroraCloudsContainer.style.display = 'block';
+                        moon.style.display = 'block';
+                        createStars();
+                        createFlower();
                     } else {
                         console.warn('Datos incompletos para ID:', id);
+                        loadingPanel.style.display = 'none';
+                        errorText.innerHTML = '❌ Datos incompletos en la base de datos. Por favor, verifica el enlace.';
+                        errorMessage.style.display = 'block';
                     }
-                    loadingPanel.style.display = 'none';
-                    starsContainer.style.display = 'block';
-                    yellowPetalsContainer.style.display = 'block';
-                    introPanel.style.display = 'block';
-                    container3d.style.display = 'block';
-                    auroraCloudsContainer.style.display = 'block';
-                    moon.style.display = 'block';
-                    createStars();
-                    createFlower();
                 } else {
                     console.error('No data found for ID:', id);
                     loadingPanel.style.display = 'none';
@@ -631,8 +635,6 @@
 
         var doc = document;
         var flower = doc.querySelector('.flower');
-        var range = doc.querySelector('.range');
-
         var maxParts = 20;
         var maxPetalsDef = 6;
         var maxPetals = maxPetalsDef;
@@ -658,7 +660,7 @@
             petal.classList.add('petal');
 
             for (var i = 1; i <= maxParts; i++) {
-                newBox = createBox(box, i);
+                let newBox = createBox(box, i); // Declarar newBox con let
                 box = newBox;
             }
 
