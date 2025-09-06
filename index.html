@@ -429,7 +429,7 @@
 </head>
 <body>
     <div class="loading-panel" id="loadingPanel">
-        <p>⏳ Cargando tu men...</p>
+        <p>⏳ Cargando tu mensajeee...</p>
         <div class="loading-bar">
             <div class="loading-bar-fill" id="loadingBarFill"></div>
         </div>
@@ -534,18 +534,22 @@
             }
 
             try {
+                console.log('Intentando cargar datos para ID:', id);
                 const snapshot = await get(ref(database, 'mensajes/' + id));
                 if (snapshot.exists()) {
                     const data = snapshot.val();
+                    console.log('Datos obtenidos:', data);
                     if (data.titulo && data.contenido) {
-                        // Enviar título y contenido a la iframe carta.html
                         introIframe.addEventListener('load', () => {
+                            console.log('Enviando datos a carta.html:', data.titulo, data.contenido);
                             introIframe.contentWindow.postMessage({
                                 type: 'messageData',
                                 titulo: data.titulo,
                                 contenido: data.contenido
                             }, '*');
                         });
+                    } else {
+                        console.warn('Datos incompletos para ID:', id);
                     }
                     loadingPanel.style.display = 'none';
                     starsContainer.style.display = 'block';
@@ -563,9 +567,9 @@
                     errorMessage.style.display = 'block';
                 }
             } catch (error) {
-                console.error('Error al cargar datos:', error);
+                console.error('Error al cargar datos:', error.code, error.message);
                 loadingPanel.style.display = 'none';
-                errorText.innerHTML = '❌ Error al conectar con la base de datos. Intenta de nuevo más tarde.';
+                errorText.innerHTML = `❌ Error al conectar con la base de datos: ${error.message}. Intenta de nuevo más tarde.`;
                 errorMessage.style.display = 'block';
             }
         }
