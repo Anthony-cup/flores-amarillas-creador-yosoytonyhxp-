@@ -429,14 +429,14 @@
 </head>
 <body>
     <div class="loading-panel" id="loadingPanel">
-        <p>⏳ Cargando tu mensaje...</p>
+        <p>⏳ Cargando tu men...</p>
         <div class="loading-bar">
             <div class="loading-bar-fill" id="loadingBarFill"></div>
         </div>
     </div>
 
     <div class="error-message" id="errorMessage" style="display: none;">
-        <p id="errorText">❌ Necesitas crear tu proyecto primero: <a href="https://flores-amarillas-53011.web.app">Crear Proyecto</a></p>
+        <p id="errorText"></p>
     </div>
 
     <div class="stars-container" id="starsContainer" style="display: none;"></div>
@@ -449,7 +449,7 @@
     <div class="yellow-petals-container" id="yellowPetalsContainer" style="display: none;"></div>
 
     <div class="intro-panel" id="introPanel" style="display: none;">
-        <iframe src="carta.html" class="intro-iframe" allowtransparency="true"></iframe>
+        <iframe src="carta.html" class="intro-iframe" id="introIframe" allowtransparency="true"></iframe>
     </div>
 
     <div class="container-3d" id="container3d" style="display: none;">
@@ -508,6 +508,7 @@
         const yellowPetalsContainer = document.getElementById('yellowPetalsContainer');
         const centerImage = document.getElementById('centerImage');
         const introPanel = document.getElementById('introPanel');
+        const introIframe = document.getElementById('introIframe');
         const centerFlower = document.getElementById('centerFlower');
         const loadingPanel = document.getElementById('loadingPanel');
         const loadingBarFill = document.getElementById('loadingBarFill');
@@ -536,8 +537,15 @@
                 const snapshot = await get(ref(database, 'mensajes/' + id));
                 if (snapshot.exists()) {
                     const data = snapshot.val();
-                    if (data.imagen) {
-                        centerImage.src = data.imagen;
+                    if (data.titulo && data.contenido) {
+                        // Enviar título y contenido a la iframe carta.html
+                        introIframe.addEventListener('load', () => {
+                            introIframe.contentWindow.postMessage({
+                                type: 'messageData',
+                                titulo: data.titulo,
+                                contenido: data.contenido
+                            }, '*');
+                        });
                     }
                     loadingPanel.style.display = 'none';
                     starsContainer.style.display = 'block';
