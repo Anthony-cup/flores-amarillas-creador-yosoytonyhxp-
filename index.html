@@ -2,24 +2,22 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>6 Paneles 3D Girando - Día de las Flores Amarillas</title>
     <style>
         :root {
-            --size: 10vmin;
-            --shape-size: 0.5em;
+            --size: 8vmin;
+            --shape-size: 0.4em;
         }
-
         body {
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, rgba(26, 10, 46, 0.9) 0%, rgba(45, 27, 105, 0.9) 50%, rgba(10, 10, 26, 0.9) 100%), 
+            background: linear-gradient(135deg, rgba(26, 10, 46, 0.9) 0%, rgba(45, 27, 105, 0.9) 50%, rgba(10, 10, 26, 0.9) 100%),
                         url('https://s0.smartresize.com/wallpaper/260/397/HD-wallpaper-flowers-sunset-sky-field-sunflower-yellow-flower.jpg') no-repeat center center fixed;
             background-size: cover;
             overflow: hidden;
             font-family: 'Georgia', serif;
         }
-
         .stars-container {
             position: fixed;
             top: 0;
@@ -29,7 +27,6 @@
             z-index: -3;
             pointer-events: none;
         }
-
         .star {
             position: absolute;
             width: 2px;
@@ -38,30 +35,26 @@
             border-radius: 50%;
             animation: twinkle 2.5s ease-in-out infinite alternate;
         }
-
         @keyframes twinkle {
             0% { opacity: 0.3; }
             100% { opacity: 0.9; }
         }
-
         .moon {
             position: fixed;
-            width: 90px;
-            height: 90px;
+            width: 60px;
+            height: 60px;
             background: radial-gradient(circle at 30% 30%, #ffd700 0%, #fffacd 100%);
             border-radius: 50%;
-            top: 8%;
-            right: 12%;
+            top: 5%;
+            right: 5%;
             z-index: -2;
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
             animation: moonGlow 5s ease-in-out infinite;
         }
-
         @keyframes moonGlow {
-            0%, 100% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.6); }
-            50% { box-shadow: 0 0 60px rgba(255, 215, 0, 0.9); }
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.6); }
+            50% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.9); }
         }
-
         .aurora-clouds-container {
             position: fixed;
             top: 0;
@@ -71,40 +64,34 @@
             z-index: -2;
             pointer-events: none;
         }
-
         .aurora-cloud {
             position: absolute;
-            width: 600px;
-            height: 200px;
+            width: 300px;
+            height: 100px;
             background: radial-gradient(ellipse at center, rgba(138, 43, 226, 0.4) 0%, rgba(255, 215, 0, 0.3) 40%, transparent 70%);
             border-radius: 50%;
-            filter: blur(35px);
+            filter: blur(20px);
             animation: auroraFlow 18s linear infinite;
         }
-
         .aurora-cloud-1 {
-            top: 15%;
-            left: -200px;
+            top: 10%;
+            left: -100px;
         }
-
         .aurora-cloud-2 {
-            top: 35%;
-            left: -300px;
+            top: 30%;
+            left: -150px;
             animation-delay: -6s;
         }
-
         .aurora-cloud-3 {
-            top: 55%;
-            left: -250px;
+            top: 50%;
+            left: -125px;
             animation-delay: -12s;
         }
-
         @keyframes auroraFlow {
-            0% { transform: translateX(-200px); opacity: 0.3; }
+            0% { transform: translateX(-100px); opacity: 0.3; }
             50% { transform: translateX(50vw); opacity: 0.6; }
             100% { transform: translateX(120vw); opacity: 0.3; }
         }
-
         .yellow-petals-container {
             position: fixed;
             top: 0;
@@ -114,29 +101,26 @@
             z-index: 8;
             pointer-events: none;
         }
-
         .yellow-petal {
             position: absolute;
-            width: 14px;
-            height: 8px;
+            width: 10px;
+            height: 6px;
             background: linear-gradient(45deg, #ffd700, #fffacd);
             border-radius: 50% 20% 50% 20%;
             animation: yellowPetalFall linear forwards;
             opacity: 0.9;
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.9);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.9);
         }
-
         .heart {
             position: absolute;
-            width: 12px;
-            height: 12px;
+            width: 8px;
+            height: 8px;
             background: radial-gradient(circle, #ff69b4 0%, #ff1493 100%);
             clip-path: polygon(50% 0%, 100% 30%, 75% 100%, 25% 100%, 0% 30%);
             animation: yellowPetalFall linear forwards;
             opacity: 0.8;
-            box-shadow: 0 0 10px rgba(255, 105, 180, 0.7);
+            box-shadow: 0 0 8px rgba(255, 105, 180, 0.7);
         }
-
         .emoji-rain {
             position: fixed;
             top: 0;
@@ -146,121 +130,106 @@
             z-index: 7;
             pointer-events: none;
         }
-
         .emoji {
             position: absolute;
-            font-size: 1.5rem;
+            font-size: 1rem;
             animation: emojiFall linear forwards;
             opacity: 0.8;
         }
-
         @keyframes yellowPetalFall {
             0% {
                 transform: translateY(0px) translateX(0px) rotate(0deg);
                 opacity: 0.9;
             }
             100% {
-                transform: translateY(80vh) translateX(calc((var(--random) - 0.5) * 180px)) rotate(540deg);
+                transform: translateY(80vh) translateX(calc((var(--random) - 0.5) * 100px)) rotate(540deg);
                 opacity: 0.1;
             }
         }
-
         @keyframes emojiFall {
             0% {
                 transform: translateY(-5vh) translateX(0px) rotate(0deg);
                 opacity: 0.8;
             }
             100% {
-                transform: translateY(100vh) translateX(calc((var(--random) - 0.5) * 100px)) rotate(360deg);
+                transform: translateY(100vh) translateX(calc((var(--random) - 0.5) * 80px)) rotate(360deg);
                 opacity: 0.2;
             }
         }
-
         .container-3d {
             position: relative;
             width: 100vw;
             height: 100vh;
-            perspective: 1200px;
+            perspective: 800px;
             perspective-origin: center center;
         }
-
         .panels-wrapper {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 300px;
-            height: 400px;
+            width: 200px;
+            height: 300px;
             transform-style: preserve-3d;
             transform: translate(-50%, -50%);
             animation: panelsRotate 60s linear infinite;
         }
-
         @keyframes panelsRotate {
             0% { transform: translate(-50%, -50%) rotateY(0deg); }
             100% { transform: translate(-50%, -50%) rotateY(360deg); }
         }
-
         .panel-3d {
             position: absolute;
-            width: 300px;
-            height: 400px;
+            width: 200px;
+            height: 300px;
             backface-visibility: visible;
         }
-
         .panel-iframe {
             width: 100%;
             height: 100%;
             border: none;
             background: transparent;
         }
-
-        .panel-1 { transform: rotateY(0deg) translateZ(500px); }
-        .panel-2 { transform: rotateY(60deg) translateZ(500px); }
-        .panel-3 { transform: rotateY(120deg) translateZ(500px); }
-        .panel-4 { transform: rotateY(180deg) translateZ(500px); }
-        .panel-5 { transform: rotateY(240deg) translateZ(500px); }
-        .panel-6 { transform: rotateY(300deg) translateZ(500px); }
-
+        .panel-1 { transform: rotateY(0deg) translateZ(300px); }
+        .panel-2 { transform: rotateY(60deg) translateZ(300px); }
+        .panel-3 { transform: rotateY(120deg) translateZ(300px); }
+        .panel-4 { transform: rotateY(180deg) translateZ(300px); }
+        .panel-5 { transform: rotateY(240deg) translateZ(300px); }
+        .panel-6 { transform: rotateY(300deg) translateZ(300px); }
         .floor-green {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 2000px;
-            height: 2000px;
+            width: 1000px;
+            height: 1000px;
             background: radial-gradient(circle, #2d1b69 10%, #1a1a2e 50%, #0a0a1a 80%);
             border-radius: 50%;
-            transform: translate(-50%, -50%) rotateX(90deg) translateZ(-300px);
-            box-shadow: 0 0 100px rgba(255, 215, 0, 0.5);
+            transform: translate(-50%, -50%) rotateX(90deg) translateZ(-200px);
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.5);
             animation: nightGlow 4.5s ease-in-out infinite;
         }
-
         @keyframes nightGlow {
-            0%, 100% { box-shadow: 0 0 100px rgba(255, 215, 0, 0.5); }
-            50% { box-shadow: 0 0 150px rgba(255, 215, 0, 0.7); }
+            0%, 100% { box-shadow: 0 0 50px rgba(255, 215, 0, 0.5); }
+            50% { box-shadow: 0 0 75px rgba(255, 215, 0, 0.7); }
         }
-
         .center-flower {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) translateZ(0px) scale(0.5);
+            transform: translate(-50%, -50%) translateZ(0px) scale(0.4);
             z-index: 9;
             opacity: 0;
             transform-style: preserve-3d;
             animation: counterRotate 60s linear infinite;
             transition: opacity 1s ease, transform 1s ease;
         }
-
         .center-flower.show {
             opacity: 1;
-            transform: translate(-50%, -50%) translateZ(0px) scale(1);
+            transform: translate(-50%, -50%) translateZ(0px) scale(0.8);
         }
-
         @keyframes counterRotate {
-            0% { transform: translate(-50%, -50%) translateZ(0px) rotateY(0deg) scale(1); }
-            100% { transform: translate(-50%, -50%) translateZ(0px) rotateY(-360deg) scale(1); }
+            0% { transform: translate(-50%, -50%) translateZ(0px) rotateY(0deg) scale(0.8); }
+            100% { transform: translate(-50%, -50%) translateZ(0px) rotateY(-360deg) scale(0.8); }
         }
-
         .wrapper {
             position: absolute;
             top: 0;
@@ -274,14 +243,12 @@
             transform: rotateX(-45deg);
             transform-style: preserve-3d;
         }
-
         .flower {
             width: var(--size);
             height: var(--size);
             transform-style: preserve-3d;
             position: relative;
         }
-
         .petal {
             position: absolute;
             z-index: 20;
@@ -290,20 +257,18 @@
             transform-style: preserve-3d;
             transform-origin: bottom;
         }
-
         .box {
             width: calc(var(--size) * 3);
             transform-style: preserve-3d;
             transform-origin: bottom;
             animation: rotate-box 12s infinite;
         }
-
         .shape {
             width: var(--shape-size);
             height: var(--shape-size);
             margin: auto;
             background: currentColor;
-            box-shadow: 
+            box-shadow:
                 var(--shape-size) 0 0 0,
                 calc(var(--shape-size) * 2) 0 0 0,
                 calc(-1 * var(--shape-size) * 2) 0 0 0,
@@ -311,30 +276,26 @@
             border-radius: 50%;
             animation: rotate-hue 5s infinite;
         }
-
         .center-image {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 120px;
-            height: 120px;
+            width: 80px;
+            height: 80px;
             transform: translate(-50%, -50%) translateZ(10px);
             border-radius: 50%;
             z-index: 10;
             opacity: 0;
-            filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.8));
+            filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.8));
             transition: opacity 1s ease;
             object-fit: cover;
         }
-
         .center-flower.show .center-image {
             opacity: 1;
         }
-
         .center-flower.show .box:not(.center-image) {
             animation: rotate-box 12s infinite;
         }
-
         @keyframes rotate-box {
             0% {
                 transform: rotateX(3.5deg);
@@ -352,106 +313,170 @@
                 transform: rotateX(3.5deg);
             }
         }
-
         @keyframes rotate-hue {
             100% {
                 filter: hue-rotate(360deg);
             }
         }
-
         .intro-panel {
             position: fixed;
             top: 50%;
             left: 50%;
-            width: 400px;
-            height: 500px;
+            width: 80%;
+            max-width: 300px;
+            height: 400px;
             transform: translate(-50%, -50%);
             z-index: 100;
             background: rgba(26, 10, 46, 0.9);
-            border-radius: 15px;
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.4);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
             border: 1px solid rgba(255, 215, 0, 0.3);
         }
-
         .intro-iframe {
             width: 100%;
             height: 100%;
             border: none;
-            border-radius: 15px;
+            border-radius: 10px;
             background: transparent;
         }
-
         .loading-panel {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 90%;
-            max-width: 400px;
+            width: 80%;
+            max-width: 300px;
             background: rgba(26, 10, 46, 0.9);
-            border-radius: 10px;
+            border-radius: 8px;
             border: 2px solid rgba(255, 215, 0, 0.3);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
             z-index: 1000;
-            padding: 16px;
+            padding: 12px;
             text-align: center;
             color: #fffacd;
         }
-
         .loading-panel p {
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 500;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
-
         .loading-bar {
             width: 100%;
-            height: 8px;
+            height: 6px;
             background: #333333;
-            border-radius: 4px;
+            border-radius: 3px;
             overflow: hidden;
             border: 1px solid #ffd700;
             position: relative;
         }
-
         .loading-bar-fill {
             width: 0;
             height: 100%;
             background: linear-gradient(45deg, #ffd700, #fffacd);
-            border-radius: 4px;
+            border-radius: 3px;
             transition: width 2s ease-in-out;
         }
-
         .loading-bar-fill.active {
             width: 100%;
         }
-
         .error-message {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 90%;
-            max-width: 400px;
+            width: 80%;
+            max-width: 300px;
             background: rgba(46, 10, 26, 0.9);
-            border-radius: 10px;
+            border-radius: 8px;
             border: 2px solid #dc3545;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
             z-index: 1000;
-            padding: 16px;
+            padding: 12px;
             text-align: center;
             color: #fffacd;
-            font-size: 1rem;
+            font-size: 0.9rem;
         }
-
         .error-message a {
             color: #ffd700;
             text-decoration: none;
             font-weight: 600;
         }
-
         .error-message a:hover {
             text-decoration: underline;
+        }
+        @media screen and (max-width: 600px) {
+            :root {
+                --size: 6vmin;
+                --shape-size: 0.3em;
+            }
+            .moon {
+                width: 40px;
+                height: 40px;
+                top: 3%;
+                right: 3%;
+                box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+            }
+            .aurora-cloud {
+                width: 200px;
+                height: 80px;
+                filter: blur(15px);
+            }
+            .yellow-petal {
+                width: 8px;
+                height: 5px;
+            }
+            .heart {
+                width: 6px;
+                height: 6px;
+            }
+            .emoji {
+                font-size: 0.8rem;
+            }
+            .panels-wrapper {
+                width: 150px;
+                height: 200px;
+            }
+            .panel-3d {
+                width: 150px;
+                height: 200px;
+            }
+            .panel-1, .panel-2, .panel-3, .panel-4, .panel-5, .panel-6 {
+                transform-origin: center;
+                transform: rotateY(0deg) translateZ(200px);
+            }
+            .panel-2 { transform: rotateY(60deg) translateZ(200px); }
+            .panel-3 { transform: rotateY(120deg) translateZ(200px); }
+            .panel-4 { transform: rotateY(180deg) translateZ(200px); }
+            .panel-5 { transform: rotateY(240deg) translateZ(200px); }
+            .panel-6 { transform: rotateY(300deg) translateZ(200px); }
+            .floor-green {
+                width: 800px;
+                height: 800px;
+                transform: translate(-50%, -50%) rotateX(90deg) translateZ(-150px);
+            }
+            .center-flower {
+                transform: translate(-50%, -50%) translateZ(0px) scale(0.3);
+            }
+            .center-flower.show {
+                transform: translate(-50%, -50%) translateZ(0px) scale(0.6);
+            }
+            .center-image {
+                width: 60px;
+                height: 60px;
+            }
+            .intro-panel {
+                width: 90%;
+                max-width: 280px;
+                height: 350px;
+            }
+            .loading-panel, .error-message {
+                width: 90%;
+                max-width: 280px;
+                padding: 10px;
+            }
+            .loading-panel p, .error-message {
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
@@ -462,11 +487,9 @@
             <div class="loading-bar-fill" id="loadingBarFill"></div>
         </div>
     </div>
-
     <div class="error-message" id="errorMessage" style="display: none;">
         <p id="errorText"></p>
     </div>
-
     <div class="stars-container" id="starsContainer" style="display: none;"></div>
     <div class="moon" style="display: none;"></div>
     <div class="aurora-clouds-container" style="display: none;">
@@ -476,11 +499,9 @@
     </div>
     <div class="yellow-petals-container" id="yellowPetalsContainer" style="display: none;"></div>
     <div class="emoji-rain" id="emojiRainContainer" style="display: none;"></div>
-
     <div class="intro-panel" id="introPanel" style="display: none;">
         <iframe src="carta.html" class="intro-iframe" id="introIframe" allowtransparency="true"></iframe>
     </div>
-
     <div class="container-3d" id="container3d" style="display: none;">
         <div class="panels-wrapper" id="panelsWrapper">
             <div class="floor-green"></div>
@@ -514,11 +535,9 @@
             </div>
         </div>
     </div>
-
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js';
         import { getDatabase, ref, get } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js';
-
         const firebaseConfig = {
             apiKey: "AIzaSyA36nLy1nQ4NB-39v_O3UQj3qrErVgxlh8",
             authDomain: "flores-amarillas-53011.firebaseapp.com",
@@ -529,10 +548,8 @@
             appId: "1:602385253254:web:04c1e0844b998485fca207",
             measurementId: "G-0Y4HJB85MV"
         };
-
         const app = initializeApp(firebaseConfig);
         const database = getDatabase(app);
-
         const starsContainer = document.getElementById('starsContainer');
         const yellowPetalsContainer = document.getElementById('yellowPetalsContainer');
         const emojiRainContainer = document.getElementById('emojiRainContainer');
@@ -547,14 +564,11 @@
         const container3d = document.getElementById('container3d');
         const auroraCloudsContainer = document.querySelector('.aurora-clouds-container');
         const moon = document.querySelector('.moon');
-
         async function checkAndLoadPage() {
             loadingPanel.style.display = 'block';
             loadingBarFill.classList.add('active');
-
             const urlParams = new URLSearchParams(window.location.search);
             const id = urlParams.get('id');
-
             if (!id || id.trim() === '') {
                 console.error('No ID provided in URL');
                 loadingPanel.style.display = 'none';
@@ -562,7 +576,6 @@
                 errorMessage.style.display = 'block';
                 return;
             }
-
             try {
                 console.log('Intentando cargar datos para ID:', id);
                 const snapshot = await get(ref(database, 'mensajes/' + id));
@@ -570,14 +583,12 @@
                     const data = snapshot.val();
                     console.log('Datos obtenidos:', data);
                     if (data.titulo && data.contenido) {
-                        // Actualizar imagen central si existe en los datos
                         if (data.imagen) {
                             console.log('Cargando imagen desde Firebase:', data.imagen.substring(0, 50) + '...');
                             centerImage.src = data.imagen;
                         } else {
                             console.log('No se encontró imagen en Firebase, usando imagen por defecto');
                         }
-                        // Enviar datos a carta.html
                         introIframe.addEventListener('load', () => {
                             console.log('Enviando datos a carta.html:', data.titulo, data.contenido);
                             introIframe.contentWindow.postMessage({
@@ -586,7 +597,6 @@
                                 contenido: data.contenido
                             }, '*');
                         });
-                        // Mostrar elementos solo si los datos son válidos
                         loadingPanel.style.display = 'none';
                         starsContainer.style.display = 'block';
                         yellowPetalsContainer.style.display = 'block';
@@ -617,9 +627,9 @@
                 errorMessage.style.display = 'block';
             }
         }
-
         function createStars() {
-            for (let i = 0; i < 80; i++) {
+            const starCount = window.innerWidth <= 600 ? 40 : 80;
+            for (let i = 0; i < starCount; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
                 star.style.left = Math.random() * 100 + '%';
@@ -628,7 +638,6 @@
                 starsContainer.appendChild(star);
             }
         }
-
         function createYellowPetalOrHeart() {
             const isHeart = Math.random() > 0.7;
             const element = document.createElement('div');
@@ -638,14 +647,12 @@
             element.style.setProperty('--random', Math.random());
             element.style.animationDuration = (Math.random() * 3 + 4.5) + 's';
             yellowPetalsContainer.appendChild(element);
-
             setTimeout(() => {
                 if (element.parentNode) {
                     element.parentNode.removeChild(element);
                 }
             }, 7500);
         }
-
         function createEmoji() {
             const emojis = ['🌻', '🌼', '💛'];
             const element = document.createElement('div');
@@ -656,29 +663,26 @@
             element.style.setProperty('--random', Math.random());
             element.style.animationDuration = (Math.random() * 3 + 5) + 's';
             emojiRainContainer.appendChild(element);
-
             setTimeout(() => {
                 if (element.parentNode) {
                     element.parentNode.removeChild(element);
                 }
             }, 8000);
         }
-
         function startEmojiRain() {
+            const interval = window.innerWidth <= 600 ? 1000 : 500;
             setInterval(() => {
-                if (Math.random() < 0.4) { // Increased frequency for denser rain
+                if (Math.random() < 0.3) {
                     createEmoji();
                 }
-            }, 500);
+            }, interval);
         }
-
         function startImageEntrance() {
             const interval = setInterval(() => {
-                for (let i = 0; i < 8; i++) {
+                for (let i = 0; i < (window.innerWidth <= 600 ? 4 : 8); i++) {
                     createYellowPetalOrHeart();
                 }
             }, 100);
-
             setTimeout(() => {
                 clearInterval(interval);
                 centerFlower.classList.add('show');
@@ -687,18 +691,15 @@
                 }, 2000);
             }, 5500);
         }
-
         window.addEventListener('message', (event) => {
             if (event.data === 'hideIntroPanel') {
                 introPanel.style.display = 'none';
                 startImageEntrance();
             }
         });
-
         window.addEventListener('load', () => {
             checkAndLoadPage();
         });
-
         var doc = document;
         var flower = doc.querySelector('.flower');
         var maxParts = 20;
@@ -707,10 +708,8 @@
         var partsFontStepDef = 25 / maxParts;
         var partsFontStep = partsFontStepDef;
         var huetStep = 150 / maxParts;
-
         function createFlower() {
             var angle = 360 / maxPetals;
-
             for (var i = 0; i < maxPetals; i++) {
                 var petal = createPetal();
                 var currAngle = angle * i + 'deg';
@@ -719,50 +718,39 @@
                 flower.appendChild(petal);
             }
         }
-
         function createPetal() {
             var box = createBox(null, 0);
             var petal = doc.createElement('div');
             petal.classList.add('petal');
-
             for (var i = 1; i <= maxParts; i++) {
                 let newBox = createBox(box, i);
                 box = newBox;
             }
-
             petal.appendChild(box);
             return petal;
         }
-
         function createBox(box, pos) {
             var fontSize = partsFontStep * (maxParts - pos) + 'vmin';
             var half = maxParts / 2;
             var bright = '50';
-
             if (pos < half + 1) {
                 fontSize = partsFontStep * pos + 'vmin';
             } else {
                 bright = 10 + 40 / half * (maxParts - pos);
             }
-
             var color = 'hsl(' + huetStep * pos + ', 100%, ' + bright + '%)';
-
             var newShape = doc.createElement('div');
             newShape.classList.add('shape');
-
             var newBox = doc.createElement('div');
             newBox.classList.add('box');
-
             var boxStyle = [
                 'color: ' + color,
                 'font-size: ' + fontSize
             ].join(';');
             newBox.setAttribute('style', boxStyle);
-
             if (box) {
                 newBox.appendChild(box);
             }
-
             newBox.appendChild(newShape);
             return newBox;
         }
