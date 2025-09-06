@@ -429,14 +429,14 @@
 </head>
 <body>
     <div class="loading-panel" id="loadingPanel">
-        <p>⏳ Car...</p>
+        <p>⏳ Cargando tu mensaje...</p>
         <div class="loading-bar">
             <div class="loading-bar-fill" id="loadingBarFill"></div>
         </div>
     </div>
 
     <div class="error-message" id="errorMessage" style="display: none;">
-        <p>❌ Necesitas crear tu proyecto primero: <a href="https://flores-amarillas-53011.web.app">Crear Proyecto</a></p>
+        <p id="errorText">❌ Necesitas crear tu proyecto primero: <a href="https://flores-amarillas-53011.web.app">Crear Proyecto</a></p>
     </div>
 
     <div class="stars-container" id="starsContainer" style="display: none;"></div>
@@ -512,6 +512,7 @@
         const loadingPanel = document.getElementById('loadingPanel');
         const loadingBarFill = document.getElementById('loadingBarFill');
         const errorMessage = document.getElementById('errorMessage');
+        const errorText = document.getElementById('errorText');
         const container3d = document.getElementById('container3d');
         const auroraCloudsContainer = document.querySelector('.aurora-clouds-container');
         const moon = document.querySelector('.moon');
@@ -523,9 +524,10 @@
             const urlParams = new URLSearchParams(window.location.search);
             const id = urlParams.get('id');
 
-            if (!id) {
+            if (!id || id.trim() === '') {
                 console.error('No ID provided in URL');
                 loadingPanel.style.display = 'none';
+                errorText.innerHTML = '❌ Necesitas crear tu proyecto primero: <a href="https://flores-amarillas-53011.web.app">Crear Proyecto</a>';
                 errorMessage.style.display = 'block';
                 return;
             }
@@ -549,11 +551,13 @@
                 } else {
                     console.error('No data found for ID:', id);
                     loadingPanel.style.display = 'none';
+                    errorText.innerHTML = '❌ ID inválido o no encontrado. Por favor, verifica el enlace.';
                     errorMessage.style.display = 'block';
                 }
             } catch (error) {
                 console.error('Error al cargar datos:', error);
                 loadingPanel.style.display = 'none';
+                errorText.innerHTML = '❌ Error al conectar con la base de datos. Intenta de nuevo más tarde.';
                 errorMessage.style.display = 'block';
             }
         }
