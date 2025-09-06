@@ -429,7 +429,7 @@
 </head>
 <body>
     <div class="loading-panel" id="loadingPanel">
-        <p>⏳ Cargando tu mensajeeeeeeeee...</p>
+        <p>⏳ Cargando...</p>
         <div class="loading-bar">
             <div class="loading-bar-fill" id="loadingBarFill"></div>
         </div>
@@ -540,6 +540,14 @@
                     const data = snapshot.val();
                     console.log('Datos obtenidos:', data);
                     if (data.titulo && data.contenido) {
+                        // Actualizar imagen central si existe en los datos
+                        if (data.imagen) {
+                            console.log('Cargando imagen desde Firebase:', data.imagen.substring(0, 50) + '...');
+                            centerImage.src = data.imagen;
+                        } else {
+                            console.log('No se encontró imagen en Firebase, usando imagen por defecto');
+                        }
+                        // Enviar datos a carta.html
                         introIframe.addEventListener('load', () => {
                             console.log('Enviando datos a carta.html:', data.titulo, data.contenido);
                             introIframe.contentWindow.postMessage({
@@ -660,7 +668,7 @@
             petal.classList.add('petal');
 
             for (var i = 1; i <= maxParts; i++) {
-                let newBox = createBox(box, i); // Declarar newBox con let
+                let newBox = createBox(box, i);
                 box = newBox;
             }
 
