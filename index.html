@@ -316,8 +316,8 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 120px;
-            height: 120px;
+            width: 150px;
+            height: 150px;
             transform: translate(-50%, -50%) translateZ(10px);
             border-radius: 50%;
             z-index: 10;
@@ -363,8 +363,8 @@
             position: fixed;
             top: 50%;
             left: 50%;
-            width: 400px;
-            height: 500px;
+            width: 450px;
+            height: 550px;
             transform: translate(-50%, -50%);
             z-index: 100;
             background: rgba(26, 10, 46, 0.9);
@@ -453,6 +453,52 @@
         .error-message a:hover {
             text-decoration: underline;
         }
+
+        .aviso-panel {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 400px;
+            background: rgba(26, 10, 46, 0.9);
+            border-radius: 10px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            padding: 16px;
+            text-align: center;
+            color: #fffacd;
+            display: none;
+        }
+
+        .aviso-panel p {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .aviso-panel img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .aviso-panel button {
+            padding: 10px 20px;
+            background: linear-gradient(45deg, #ffd700, #fffacd);
+            border: none;
+            border-radius: 5px;
+            color: #1a0a2e;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .aviso-panel button:hover {
+            background: linear-gradient(45deg, #fffacd, #ffd700);
+        }
     </style>
 </head>
 <body>
@@ -461,6 +507,12 @@
         <div class="loading-bar">
             <div class="loading-bar-fill" id="loadingBarFill"></div>
         </div>
+    </div>
+
+    <div class="aviso-panel" id="avisoPanel">
+        <p>Para que lo puedas ver mejor en el celular, debes marcar el sitio para ordenador como está en la imagen:</p>
+        <img src="img/aviso.jpg" alt="Instrucciones para vista de ordenador">
+        <button id="avisoOkButton">OK</button>
     </div>
 
     <div class="error-message" id="errorMessage" style="display: none;">
@@ -547,6 +599,8 @@
         const container3d = document.getElementById('container3d');
         const auroraCloudsContainer = document.querySelector('.aurora-clouds-container');
         const moon = document.querySelector('.moon');
+        const avisoPanel = document.getElementById('avisoPanel');
+        const avisoOkButton = document.getElementById('avisoOkButton');
 
         async function checkAndLoadPage() {
             loadingPanel.style.display = 'block';
@@ -586,18 +640,11 @@
                                 contenido: data.contenido
                             }, '*');
                         });
-                        // Mostrar elementos solo si los datos son válidos
-                        loadingPanel.style.display = 'none';
-                        starsContainer.style.display = 'block';
-                        yellowPetalsContainer.style.display = 'block';
-                        emojiRainContainer.style.display = 'block';
-                        introPanel.style.display = 'block';
-                        container3d.style.display = 'block';
-                        auroraCloudsContainer.style.display = 'block';
-                        moon.style.display = 'block';
-                        createStars();
-                        createFlower();
-                        startEmojiRain();
+                        // Mostrar aviso panel después de la carga
+                        setTimeout(() => {
+                            loadingPanel.style.display = 'none';
+                            avisoPanel.style.display = 'block';
+                        }, 2000); // Mostrar después de que la barra de carga termine (2 segundos)
                     } else {
                         console.warn('Datos incompletos para ID:', id);
                         loadingPanel.style.display = 'none';
@@ -666,7 +713,7 @@
 
         function startEmojiRain() {
             setInterval(() => {
-                if (Math.random() < 0.4) { // Increased frequency for denser rain
+                if (Math.random() < 0.4) {
                     createEmoji();
                 }
             }, 500);
@@ -687,6 +734,20 @@
                 }, 2000);
             }, 5500);
         }
+
+        avisoOkButton.addEventListener('click', () => {
+            avisoPanel.style.display = 'none';
+            starsContainer.style.display = 'block';
+            yellowPetalsContainer.style.display = 'block';
+            emojiRainContainer.style.display = 'block';
+            introPanel.style.display = 'block';
+            container3d.style.display = 'block';
+            auroraCloudsContainer.style.display = 'block';
+            moon.style.display = 'block';
+            createStars();
+            createFlower();
+            startEmojiRain();
+        });
 
         window.addEventListener('message', (event) => {
             if (event.data === 'hideIntroPanel') {
