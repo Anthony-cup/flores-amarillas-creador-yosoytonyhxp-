@@ -655,6 +655,7 @@
             element.style.top = '-5vh';
             element.style.setProperty('--random', Math.random());
             element.style.animationDuration = (Math.random() * 3 + 5) + 's';
+
             emojiRainContainer.appendChild(element);
 
             setTimeout(() => {
@@ -665,16 +666,11 @@
         }
 
         function startEmojiRain() {
-            const interval = setInterval(() => {
-                if (Math.random() < 0.3) { // Sparse creation for optimization
+            setInterval(() => {
+                if (Math.random() < 0.2) { // Sparse creation for optimization
                     createEmoji();
                 }
             }, 500);
-
-            setTimeout(() => {
-                clearInterval(interval);
-                emojiRainContainer.style.display = 'none';
-            }, 6000);
         }
 
         function startImageEntrance() {
